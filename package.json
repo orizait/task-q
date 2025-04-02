@@ -1,0 +1,17 @@
+{
+  "name": "senior-be-developer-task",
+  "version": "1.0.0",
+  "description": "## Introduction  Hello! If you are viewing this repository you are probably a candidate for HyperGuest senior backend developer, congrats!",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.13.17",
+    "typescript": "^5.8.2"
+  }
+}
