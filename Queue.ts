@@ -13,7 +13,7 @@ export class Queue {
         this.messages.push(message);
     }
 
-    Dequeue = (): Message | undefined => {
+    Dequeue = (workerId: number): Message | undefined => {
         if (!this.hasPendingMessages()) {
             return undefined;
         }
