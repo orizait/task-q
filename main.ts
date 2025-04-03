@@ -6,7 +6,7 @@ import { Worker } from "./Worker"
 const ITEMS_NUMBER = getRandomIntInRange(3,6)
 const WORKERS_NUMBER = getRandomIntInRange(3,6)
 
-const ITEMS = range(ITEMS_NUMBER).map(item=>`item${item}`) 
+const ITEMS = range(ITEMS_NUMBER).map(item=>`item${item}`)
 
 const applyToAll = (queue: Queue, operation: Operations, val: number): void => {
     for (const product of ITEMS) {

@@ -15,7 +15,7 @@ export class Database {
     }
 
     set = async (message: Message): Promise<void> => {
-        const current = this.data[message.key] || 0
+        const current = this.data[message.key] === undefined ? 50 : this.data[message.key];
         let result: number
         switch (message.operation) {
             case Operations.ADD:
@@ -32,6 +32,9 @@ export class Database {
         }
         const randomDelay = getRandomInt(100)
         await sleep(randomDelay)
+
+        console.log(`Set operation for ${message.key}: ${current} ${Operations[message.operation]} ${message.val} = ${result}`);
+
         this.data[message.key] = result
     }
 
