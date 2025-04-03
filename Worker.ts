@@ -17,7 +17,7 @@ export class Worker {
                 break
             }
             await callback(message)
-            this.queue.Confirm(message.id)
+            this.queue.Confirm(message.id, message.key)
         }
     }
 }

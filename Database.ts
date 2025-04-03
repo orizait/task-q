@@ -9,19 +9,13 @@ export enum Operations {
 export class Database {
 
     private data: { [key: string]: number }
-    private locks: Set<string> = new Set();
 
     constructor() {
         this.data = {};
     }
 
     set = async (message: Message): Promise<void> => {
-        while (this.locks.has(message.key)) {
-            await sleep(5);
-        }
-        this.locks.add(message.key);
-
-        const current = this.data[message.key] === undefined ? 50 : this.data[message.key];
+        const current = this.data[message.key] || 0
         let result: number
         switch (message.operation) {
             case Operations.ADD:
@@ -36,15 +30,12 @@ export class Database {
             default:
                 throw Error(`Invalid operation ${message.operation}`)
         }
-
         const randomDelay = getRandomInt(100)
         await sleep(randomDelay)
 
         console.log(`Set operation for ${message.key}: ${current} ${Operations[message.operation]} ${message.val} = ${result}`);
 
         this.data[message.key] = result
-
-        this.locks.delete(message.key);
     }
 
     get = (key: string): number => {

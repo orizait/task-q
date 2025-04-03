@@ -3,6 +3,7 @@ import { Message } from "./Database";
 export class Queue {
     private messages: Message[];
     private inProgress: Set<string>;
+    private lockedKeys: Set<string> = new Set();
 
     constructor() {
         this.messages = [];
@@ -20,16 +21,24 @@ export class Queue {
 
         for (let i = 0; i < this.messages.length; i++) {
             const message = this.messages[i];
-            if (!this.inProgress.has(message.id)) {
+            if (
+              !this.inProgress.has(message.id) &&
+              !this.lockedKeys.has(message.key)
+            ) {
                 this.inProgress.add(message.id);
+                this.lockedKeys.add(message.key);
                 return this.messages.splice(i, 1)[0];
             }
         }
+
         return undefined;
     }
 
-    Confirm = (messageId: string) => {
+    Confirm = (messageId: string, key?: string) => {
         this.inProgress.delete(messageId);
+        if (key) {
+            this.lockedKeys.delete(key);
+        }
     }
 
     Size = () => {
