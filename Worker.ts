@@ -13,6 +13,7 @@ export class Worker {
     Work = async (callback: (message: Message) => Promise<void>): Promise<void> => {
         while (true) {
             const message = this.queue.Dequeue()
+            // TODO: did not end forever, because messages can still come later
             if (!message) {
                 break
             }

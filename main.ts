@@ -27,6 +27,7 @@ const main = async () => {
     for (let i = 0; i < 10; i++) {
         applyToAll(queue, Operations.ADD, i)
     }
+    // TODO:It is better to manage parallel workers and wait until they all finish their work, without sleep(10000) - await Promise.all
     range(WORKERS_NUMBER).forEach(i => {
         const worker = new Worker(i, queue)
         worker.Work(db.set)

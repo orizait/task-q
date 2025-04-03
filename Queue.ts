@@ -69,6 +69,7 @@ export class Queue {
         }
     }
 
+    // TODO: we can do it via - get size()
     Size = () => {
         return this.messages.length;
     }

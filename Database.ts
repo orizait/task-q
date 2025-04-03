@@ -38,6 +38,7 @@ export class Database {
         this.data[message.key] = result
     }
 
+    // TODO: it is better to return the copy return { ...this.data };
     get = (key: string): number => {
         return this.data[key]
     }
