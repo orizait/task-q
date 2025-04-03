@@ -12,12 +12,12 @@ export class Worker {
 
     Work = async (callback: (message: Message) => Promise<void>): Promise<void> => {
         while (true) {
-            const message = this.queue.Dequeue(this.workerId)
+            const message = this.queue.Dequeue()
             if (!message) {
                 break
             }
             await callback(message)
-            this.queue.Confirm(this.workerId, message.id)
+            this.queue.Confirm(message.id)
         }
     }
 }

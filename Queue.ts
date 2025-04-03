@@ -13,7 +13,7 @@ export class Queue {
         this.messages.push(message);
     }
 
-    Dequeue = (workerId: number): Message | undefined => {
+    Dequeue = (): Message | undefined => {
         if (!this.hasPendingMessages()) {
             return undefined;
         }
@@ -28,7 +28,7 @@ export class Queue {
         return undefined;
     }
 
-    Confirm = (workerId: number, messageId: string) => {
+    Confirm = (messageId: string) => {
         this.inProgress.delete(messageId);
     }
 
