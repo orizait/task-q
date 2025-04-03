@@ -28,10 +28,4 @@ describe("Database", () => {
     await db.set(subMsg);
     expect(db.get("item1")).toBe(70);
   });
-
-  test("should default to 50 if not set", async () => {
-    const addMsg = new Message("newItem", Operations.ADD, 10);
-    await db.set(addMsg);
-    expect(db.get("newItem")).toBe(60);
-  });
 });

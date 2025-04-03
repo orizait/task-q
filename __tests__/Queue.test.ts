@@ -12,25 +12,25 @@ describe("Queue", () => {
 
   test("should enqueue and dequeue a message", () => {
     queue.Enqueue(message);
-    const dequeued = queue.Dequeue(1);
+    const dequeued = queue.Dequeue();
     expect(dequeued).toEqual(message);
   });
 
   test("should not dequeue same message twice", () => {
     queue.Enqueue(message);
-    const first = queue.Dequeue(1);
-    const second = queue.Dequeue(2);
+    const first = queue.Dequeue();
+    const second = queue.Dequeue();
     expect(first).toBeDefined();
     expect(second).toBeUndefined();
   });
 
   test("should confirm a message and allow re-dequeue", () => {
     queue.Enqueue(message);
-    const msg = queue.Dequeue(1);
+    const msg = queue.Dequeue();
     expect(msg).toBeDefined();
-    queue.Confirm(1, message.id);
-    queue.Enqueue(message); // повторна спроба
-    const retry = queue.Dequeue(2);
+    queue.Confirm(msg!.id, msg!.key);
+    queue.Enqueue(message);
+    const retry = queue.Dequeue();
     expect(retry).toBeDefined();
   });
 
